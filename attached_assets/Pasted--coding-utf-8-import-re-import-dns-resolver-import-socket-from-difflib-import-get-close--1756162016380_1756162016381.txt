@@ -1,0 +1,280 @@
+# -- coding: utf-8 --
+import re
+import dns.resolver
+import socket
+from difflib import get_close_matches
+
+# Lista de domínios descartáveis
+DOMINIOS_DESCARTAVEIS = {
+    'mailinator.com', 'tempmail.com', '10minutemail.com', 'guerrillamail.com',
+    'sharklasers.com', 'throwawaymail.com', 'yopmail.com', 'dispostable.com'
+}
+
+# Lista de prefixos comuns para e-mails de função
+PREFIXOS_ROLE_BASED = {
+    'admin', 'support', 'info', 'contact', 'sales', 'billing', 'help',
+    'webmaster', 'marketing', 'team', 'office', 'noreply'
+}
+
+# Lista de domínios populares para detecção de erros de digitação
+DOMINIOS_POPULARES = [
+    'hotmail.com', 'gmail.com', 'icloud.com', 'outlook.com', 'yahoo.com', 'ymail.com',
+    'hotmail.com.br', 'gmail.com.br', 'yahoo.com.br', 'outlook.com.br'
+]
+
+def log_line(msg: str):
+    print(msg)  # Função de log simplificada para evitar dependências externas
+
+def verificar_email_individual(email: str) -> dict:
+    """Verifica um e-mail localmente simulando funcionalidades do QEV"""
+    try:
+        # Validação de sintaxe
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_regex, email):
+            log_line(f"E-mail {email}: sintaxe inválida")
+            return {
+                'success': False,
+                'email': email,
+                'result': 'invalid',
+                'reason': 'invalid_format',
+                'message': 'Formato de e-mail inválido',
+                'disposable': 'false',
+                'accept_all': 'false',
+                'role': 'false',
+                'free': 'false',
+                'safe_to_send': 'false',
+                'did_you_mean': ''
+            }
+
+        # Separa usuário e domínio
+        usuario, dominio = email.split('@')
+        
+        # Validação preliminar do domínio
+        dominio_labels = dominio.split('.')
+        for label in dominio_labels:
+            if not label or len(label) > 63:
+                log_line(f"E-mail {email}: domínio contém label inválido (vazio ou muito longo)")
+                return {
+                    'success': False,
+                    'email': email,
+                    'result': 'invalid',
+                    'reason': 'invalid_domain_format',
+                    'message': 'Domínio contém label vazio ou muito longo',
+                    'disposable': 'false',
+                    'accept_all': 'false',
+                    'role': 'false',
+                    'free': 'false',
+                    'safe_to_send': 'false',
+                    'did_you_mean': ''
+                }
+        if len(dominio) > 253:
+            log_line(f"E-mail {email}: domínio excede o limite de comprimento (253 caracteres)")
+            return {
+                'success': False,
+                'email': email,
+                'result': 'invalid',
+                'reason': 'invalid_domain_length',
+                'message': 'Domínio excede o limite de comprimento',
+                'disposable': 'false',
+                'accept_all': 'false',
+                'role': 'false',
+                'free': 'false',
+                'safe_to_send': 'false',
+                'did_you_mean': ''
+            }
+
+        # Detecção de erros de digitação em domínios
+        dominio_lower = dominio.lower()
+        if dominio_lower not in DOMINIOS_POPULARES:  # Evita verificar domínios populares válidos
+            similar_domains = get_close_matches(dominio_lower, DOMINIOS_POPULARES, n=1, cutoff=0.85)
+            did_you_mean = similar_domains[0] if similar_domains else ''
+            if did_you_mean:
+                log_line(f"E-mail {email}: domínio suspeito, possível erro de digitação para {did_you_mean}")
+                return {
+                    'success': False,
+                    'email': email,
+                    'result': 'invalid',
+                    'reason': 'suspected_typo',
+                    'message': f'Domínio suspeito, possível erro de digitação para {did_you_mean}',
+                    'disposable': 'false',
+                    'accept_all': 'false',
+                    'role': 'false',
+                    'free': 'false',
+                    'safe_to_send': 'false',
+                    'did_you_mean': did_you_mean
+                }
+        else:
+            did_you_mean = ''
+
+        # Detecção de e-mails de função
+        is_role_based = usuario.lower() in PREFIXOS_ROLE_BASED
+        role_status = 'true' if is_role_based else 'false'
+
+        # Detecção de domínios descartáveis
+        is_disposable = dominio_lower in DOMINIOS_DESCARTAVEIS
+        disposable_status = 'true' if is_disposable else 'false'
+
+        # Verificação de domínio (resolução DNS) com retry
+        max_tentativas = 2
+        for tentativa in range(max_tentativas):
+            try:
+                dns.resolver.resolve(dominio, 'A')
+                break
+            except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer) as e:
+                log_line(f"E-mail {email}: domínio não encontrado (tentativa {tentativa+1})")
+                return {
+                    'success': False,
+                    'email': email,
+                    'result': 'invalid',
+                    'reason': 'invalid_domain',
+                    'message': 'Domínio não existe',
+                    'disposable': disposable_status,
+                    'accept_all': 'false',
+                    'role': role_status,
+                    'free': 'false',
+                    'safe_to_send': 'false',
+                    'did_you_mean': did_you_mean
+                }
+            except UnicodeError as e:
+                log_line(f"E-mail {email}: erro de codificação no domínio: {str(e)}")
+                return {
+                    'success': False,
+                    'email': email,
+                    'result': 'invalid',
+                    'reason': 'invalid_domain_encoding',
+                    'message': 'Domínio contém caracteres inválidos ou formato incorreto',
+                    'disposable': disposable_status,
+                    'accept_all': 'false',
+                    'role': role_status,
+                    'free': 'false',
+                    'safe_to_send': 'false',
+                    'did_you_mean': did_you_mean
+                }
+            except Exception as e:
+                if tentativa == max_tentativas - 1:
+                    log_line(f"E-mail {email}: erro na resolução DNS após {max_tentativas} tentativas: {str(e)}")
+                    return {
+                        'success': False,
+                        'email': email,
+                        'result': 'unknown',
+                        'reason': 'dns_resolution_failed',
+                        'message': f'Falha na resolução DNS: {str(e)}',
+                        'disposable': disposable_status,
+                        'accept_all': 'false',
+                        'role': role_status,
+                        'free': 'false',
+                        'safe_to_send': 'false',
+                        'did_you_mean': did_you_mean
+                    }
+                time.sleep(1)  # Pausa antes de tentar novamente
+
+        # Verificação de registros MX com retry
+        try:
+            mx_records = dns.resolver.resolve(dominio, 'MX')
+            if not mx_records:
+                log_line(f"E-mail {email}: nenhum registro MX encontrado")
+                return {
+                    'success': False,
+                    'email': email,
+                    'result': 'invalid',
+                    'reason': 'no_mx_records',
+                    'message': 'Nenhum registro MX encontrado',
+                    'disposable': disposable_status,
+                    'accept_all': 'false',
+                    'role': role_status,
+                    'free': 'false',
+                    'safe_to_send': 'false',
+                    'did_you_mean': did_you_mean
+                }
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            log_line(f"E-mail {email}: erro ao resolver registros MX")
+            return {
+                'success': False,
+                'email': email,
+                'result': 'invalid',
+                'reason': 'mx_resolution_failed',
+                'message': 'Falha ao resolver registros MX',
+                'disposable': disposable_status,
+                'accept_all': 'false',
+                'role': role_status,
+                'free': 'false',
+                'safe_to_send': 'false',
+                'did_you_mean': did_you_mean
+            }
+        except Exception as e:
+            log_line(f"E-mail {email}: erro na resolução MX: {str(e)}")
+            return {
+                'success': False,
+                'email': email,
+                'result': 'unknown',
+                'reason': 'mx clustered_failed',
+                'message': f'Falha na resolução MX: {str(e)}',
+                'disposable': disposable_status,
+                'accept_all': 'false',
+                'role': role_status,
+                'free': 'false',
+                'safe_to_send': 'false',
+                'did_you_mean': did_you_mean
+            }
+
+        # Detecção de catch-all (simplificada, baseada em padrões)
+        accept_all = 'true' if dominio_lower in {'example.com', 'test.com'} else 'false'
+
+        # Simulação de SMTP (limitada, apenas verifica se o servidor SMTP responde) com retry
+        for tentativa in range(max_tentativas):
+            try:
+                mx_record = mx_records[0].exchange.to_text()
+                socket.create_connection((mx_record, 25), timeout=5)
+                safe_to_send = 'true'
+                result = 'valid'
+                reason = 'smtp_connect_success'
+                message = 'Servidor SMTP respondeu'
+                break
+            except (socket.gaierror, socket.timeout) as e:
+                if tentativa == max_tentativas - 1:
+                    log_line(f"E-mail {email}: falha na conexão SMTP após {max_tentativas} tentativas: {str(e)}")
+                    return {
+                        'success': False,
+                        'email': email,
+                        'result': 'invalid',
+                        'reason': 'smtp_connect_failed',
+                        'message': f'Falha ao conectar ao servidor SMTP: {str(e)}',
+                        'disposable': disposable_status,
+                        'accept_all': accept_all,
+                        'role': role_status,
+                        'free': 'false',
+                        'safe_to_send': 'false',
+                        'did_you_mean': did_you_mean
+                    }
+                time.sleep(1)  # Pausa antes de tentar novamente
+
+        log_line(f"E-mail {email} verificado com sucesso: {result}")
+        return {
+            'success': True,
+            'email': email,
+            'result': result,
+            'reason': reason,
+            'message': message,
+            'disposable': disposable_status,
+            'accept_all': accept_all,
+            'role': role_status,
+            'free': 'false',
+            'safe_to_send': safe_to_send,
+            'did_you_mean': did_you_mean
+        }
+
+    except Exception as e:
+        log_line(f"Exceção geral ao verificar e-mail {email}: {str(e)}")
+        return {
+            'success': False,
+            'email': email,
+            'result': 'unknown',
+            'reason': 'exception',
+            'message': f'Erro inesperado durante a verificação: {str(e)}. Entre em contato com o suporte para mais detalhes.',
+            'disposable': 'false',
+            'accept_all': 'false',
+            'role': 'false',
+            'free': 'false',
+            'safe_to_send': 'false',
+            'did_you_mean': ''
+        }
