@@ -146,7 +146,14 @@ export default function CepPage() {
         </div>
       </section>
       
-      {/* AdSense Placeholder */}
+      {/* AdSense Placement - Middle */}
+      <AdPlaceholder 
+        type="square" 
+        description="[ Espaço para Anúncio AdSense - Square Banner ]"
+        dimensions="300x250 ou 336x280"
+      />
+      
+      {/* AdSense Placement - Before Footer */}
       <AdPlaceholder 
         type="horizontal" 
         description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"

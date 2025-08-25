@@ -140,6 +140,15 @@ export default function Home() {
               ))}
             </div>
           </div>
+
+          {/* AdSense Placement - Between Tool Sections */}
+          <div className="my-12">
+            <AdPlaceholder 
+              type="square" 
+              description="[ Espaço para Anúncio AdSense - Square Banner ]"
+              dimensions="300x250 ou 336x280"
+            />
+          </div>
           
           {/* Conversion Tools */}
           <div>
@@ -165,11 +174,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AdSense Placeholder */}
+      {/* AdSense Placement - Above Features */}
       <AdPlaceholder 
-        type="square" 
-        description="[ Espaço para Anúncio AdSense - Square Banner ]"
-        dimensions="300x250"
+        type="horizontal" 
+        description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"
+        dimensions="728x90 ou 320x50 (responsivo)"
       />
 
       {/* Features Section */}
@@ -374,12 +383,12 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fab fa-github text-white text-2xl"></i>
+              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-users text-white text-2xl"></i>
               </div>
-              <h4 className="text-xl font-semibold mb-2">GitHub</h4>
-              <p className="text-slate-400 mb-2">github.com/validabr</p>
-              <p className="text-sm text-slate-500">Contribuições e issues</p>
+              <h4 className="text-xl font-semibold mb-2">Comunidade</h4>
+              <p className="text-slate-400 mb-2">+10.000 usuários ativos</p>
+              <p className="text-sm text-slate-500">Validações realizadas diariamente</p>
             </div>
             
             <div className="text-center">
@@ -392,35 +401,17 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="mt-12 text-center">
-            <div className="bg-slate-800 rounded-lg p-6 max-w-4xl mx-auto">
-              <h4 className="text-lg font-semibold mb-3">
-                <i className="fas fa-heart text-red-500 mr-2"></i>
-                Gosta do ValidaBR?
-              </h4>
-              <p className="text-slate-400 mb-4">
-                Ajude a manter este projeto gratuito e em funcionamento. Sua contribuição faz a diferença!
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
-                  <i className="fas fa-star mr-2"></i>
-                  Star no GitHub
-                </button>
-                <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors">
-                  <i className="fas fa-coffee mr-2"></i>
-                  Compre um Café
-                </button>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors">
-                  <i className="fas fa-share mr-2"></i>
-                  Compartilhar
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* AdSense Placeholder */}
+      {/* Additional AdSense Placement - Before Contact */}
+      <AdPlaceholder 
+        type="square" 
+        description="[ Espaço para Anúncio AdSense - Square Banner ]"
+        dimensions="300x250 ou 336x280"
+      />
+
+      {/* Final AdSense Placement - Before Footer */}
       <AdPlaceholder 
         type="horizontal" 
         description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"
