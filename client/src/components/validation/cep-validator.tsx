@@ -130,13 +130,13 @@ export default function CepValidator({ onBack }: CepValidatorProps) {
           )}
 
           <div className="mt-6 text-center">
-            <button 
-              onClick={onBack}
+            <a 
+              href="/"
               className="text-slate-600 hover:text-slate-900 transition-colors"
               data-testid="button-back-to-tools"
             >
               <i className="fas fa-arrow-left mr-2"></i>Voltar às Ferramentas
-            </button>
+            </a>
           </div>
         </Card>
       </div>

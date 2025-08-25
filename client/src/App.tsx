@@ -5,11 +5,19 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
+import CpfCnpjPage from "@/pages/cpf-cnpj";
+import TelefonePage from "@/pages/telefone";
+import CepPage from "@/pages/cep";
+import EmailPage from "@/pages/email";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/cpf-cnpj" component={CpfCnpjPage} />
+      <Route path="/telefone" component={TelefonePage} />
+      <Route path="/cep" component={CepPage} />
+      <Route path="/email" component={EmailPage} />
       <Route component={NotFound} />
     </Switch>
   );
