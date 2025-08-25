@@ -76,6 +76,25 @@ export const emailValidationResponseSchema = z.object({
   didYouMean: z.string().optional(),
 });
 
+// File Conversion
+export const fileConversionRequestSchema = z.object({
+  type: z.enum([
+    'word-to-pdf',
+    'pdf-to-word', 
+    'image-converter'
+  ]),
+});
+
+export const fileConversionResponseSchema = z.object({
+  success: z.boolean(),
+  downloadUrl: z.string().optional(),
+  filename: z.string().optional(),
+  originalName: z.string().optional(),
+  size: z.number().optional(),
+  format: z.string().optional(),
+  error: z.string().optional(),
+});
+
 export type CpfCnpjValidationRequest = z.infer<typeof cpfCnpjValidationRequestSchema>;
 export type CpfCnpjValidationResponse = z.infer<typeof cpfCnpjValidationResponseSchema>;
 export type PhoneValidationRequest = z.infer<typeof phoneValidationRequestSchema>;
@@ -84,3 +103,5 @@ export type CepValidationRequest = z.infer<typeof cepValidationRequestSchema>;
 export type CepValidationResponse = z.infer<typeof cepValidationResponseSchema>;
 export type EmailValidationRequest = z.infer<typeof emailValidationRequestSchema>;
 export type EmailValidationResponse = z.infer<typeof emailValidationResponseSchema>;
+export type FileConversionRequest = z.infer<typeof fileConversionRequestSchema>;
+export type FileConversionResponse = z.infer<typeof fileConversionResponseSchema>;

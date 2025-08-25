@@ -4,7 +4,7 @@ import ToolCard from "@/components/validation/tool-card";
 import AdPlaceholder from "@/components/ui/ad-placeholder";
 
 export default function Home() {
-  const tools = [
+  const validationTools = [
     {
       id: 'cpf-cnpj' as const,
       title: 'CPF / CNPJ',
@@ -40,6 +40,36 @@ export default function Home() {
       bgColor: 'bg-orange-100',
       iconColor: 'text-orange-600',
       href: '/email',
+    },
+  ];
+
+  const conversionTools = [
+    {
+      id: 'conversor-pdf' as const,
+      title: 'Word para PDF',
+      description: 'Converta documentos Word (.docx, .doc) para PDF mantendo formatação',
+      icon: 'fas fa-file-pdf',
+      bgColor: 'bg-red-100',
+      iconColor: 'text-red-600',
+      href: '/conversor-pdf',
+    },
+    {
+      id: 'conversor-word' as const,
+      title: 'PDF para Word',
+      description: 'Transforme PDFs em documentos Word editáveis com OCR avançado',
+      icon: 'fas fa-file-word',
+      bgColor: 'bg-blue-100',
+      iconColor: 'text-blue-600',
+      href: '/conversor-word',
+    },
+    {
+      id: 'conversor-imagem' as const,
+      title: 'Conversor Imagens',
+      description: 'Converta entre JPG, PNG, WebP, GIF e outros formatos de imagem',
+      icon: 'fas fa-image',
+      bgColor: 'bg-purple-100',
+      iconColor: 'text-purple-600',
+      href: '/conversor-imagem',
     },
   ];
 
@@ -84,21 +114,53 @@ export default function Home() {
       {/* Tools Grid */}
       <section id="ferramentas" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold text-center text-slate-900 mb-12">Escolha sua Ferramenta</h3>
+          <h3 className="text-3xl font-bold text-center text-slate-900 mb-4">Suas Ferramentas Online</h3>
+          <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
+            Validadores e conversores profissionais para suas necessidades diárias. Tudo gratuito, rápido e seguro.
+          </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {tools.map((tool) => (
-              <ToolCard
-                key={tool.id}
-                title={tool.title}
-                description={tool.description}
-                icon={tool.icon}
-                bgColor={tool.bgColor}
-                iconColor={tool.iconColor}
-                href={tool.href}
-                data-testid={`card-tool-${tool.id}`}
-              />
-            ))}
+          {/* Validation Tools */}
+          <div className="mb-12">
+            <h4 className="text-xl font-semibold text-slate-900 mb-6 text-center">
+              <i className="fas fa-check-circle text-green-600 mr-2"></i>
+              Validadores
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {validationTools.map((tool) => (
+                <ToolCard
+                  key={tool.id}
+                  title={tool.title}
+                  description={tool.description}
+                  icon={tool.icon}
+                  bgColor={tool.bgColor}
+                  iconColor={tool.iconColor}
+                  href={tool.href}
+                  data-testid={`card-tool-${tool.id}`}
+                />
+              ))}
+            </div>
+          </div>
+          
+          {/* Conversion Tools */}
+          <div>
+            <h4 className="text-xl font-semibold text-slate-900 mb-6 text-center">
+              <i className="fas fa-exchange-alt text-blue-600 mr-2"></i>
+              Conversores de Arquivo
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {conversionTools.map((tool) => (
+                <ToolCard
+                  key={tool.id}
+                  title={tool.title}
+                  description={tool.description}
+                  icon={tool.icon}
+                  bgColor={tool.bgColor}
+                  iconColor={tool.iconColor}
+                  href={tool.href}
+                  data-testid={`card-tool-${tool.id}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
