@@ -80,13 +80,33 @@ export default function FileConverter({
     }
   }, []);
 
+  const getMimeTypes = (formats: string) => {
+    const mimeTypeMap: Record<string, string[]> = {
+      '.pdf': ['application/pdf'],
+      '.doc': ['application/msword'],
+      '.docx': ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+      '.jpg': ['.jpg', '.jpeg'],
+      '.jpeg': ['.jpg', '.jpeg'], 
+      '.png': ['.png'],
+      '.gif': ['.gif'],
+      '.bmp': ['.bmp'],
+      '.tiff': ['.tiff', '.tif'],
+      '.webp': ['.webp']
+    };
+    
+    return formats.split(',').reduce((acc, format) => {
+      const key = format.trim();
+      const extensions = mimeTypeMap[key] || [];
+      extensions.forEach(ext => {
+        acc[ext] = extensions;
+      });
+      return acc;
+    }, {} as Record<string, string[]>);
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: acceptedFormats.split(',').reduce((acc, format) => {
-      const key = format.trim();
-      acc[key] = [];
-      return acc;
-    }, {} as Record<string, string[]>),
+    accept: getMimeTypes(acceptedFormats),
     maxFiles: 1,
     maxSize: 50 * 1024 * 1024, // 50MB
   });
