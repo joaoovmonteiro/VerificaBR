@@ -10,25 +10,29 @@ Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
+### Backend Architecture - 100% Python
+
+**Flask API Server**: The backend is now a complete Python Flask application with all validation logic implemented in pure Python. The server provides RESTful endpoints for each document type with proper CORS handling and error management.
+
+**Python Validation Classes**: Business logic is organized in Python classes:
+- `DocumentValidator`: CPF/CNPJ validation using official Brazilian algorithms
+- `PhoneValidator`: Brazilian phone number validation with carrier detection
+- `CepValidator`: CEP validation with ViaCEP API integration  
+- `EmailValidator`: Advanced email validation with DNS/MX verification
+
+**API Endpoints**: All validation endpoints migrated to Python Flask:
+- `/api/validate/cpf-cnpj` - Document validation
+- `/api/validate/telefone` - Phone validation
+- `/api/validate/cep` - Postal code validation
+- `/api/validate/email` - Email validation
+
+**Static File Serving**: Flask serves the built React frontend as static files, maintaining the exact same user interface while running on a pure Python backend.
+
 ### Frontend Architecture
 
-**React Single-Page Application**: The frontend is built using React 18 with TypeScript, utilizing a modern component-based architecture. The application uses Wouter for lightweight client-side routing and TanStack Query for server state management and caching.
+**React Build Integration**: The existing React frontend is built and served as static files by the Flask application, maintaining the exact same user experience while simplifying the development stack to focus on Python.
 
-**Component Structure**: The UI follows a modular design with shadcn/ui components providing a consistent design system. Components are organized into layout components (Header, Footer), validation tools (CPF/CNPJ, Phone, CEP, Email validators), and reusable UI components. The application uses a card-based interface where users can select validation tools from a main dashboard.
-
-**Styling System**: Tailwind CSS provides utility-first styling with a custom configuration supporting dark mode and CSS variables for theming. The design system uses a "new-york" style from shadcn/ui with neutral base colors and custom color schemes for different validation tools.
-
-**State Management**: React hooks manage local component state, while TanStack Query handles server state, caching, and API interactions. The validation operations are stateless, with results displayed immediately after API responses.
-
-### Backend Architecture
-
-**Express.js API Server**: The backend is a REST API built with Express.js and TypeScript, following a clean separation of concerns. The server provides validation endpoints for each document type and handles CORS, request logging, and error handling middleware.
-
-**Service Layer Pattern**: Business logic is encapsulated in service classes (DocumentValidator, PhoneValidator, CepValidator, EmailValidator) that contain the validation algorithms. This separation allows for easy testing and maintenance of validation logic.
-
-**Request/Response Validation**: Zod schemas define and validate API request and response structures, ensuring type safety and proper data validation across the client-server boundary.
-
-**Development Setup**: The application uses Vite for development with hot module replacement, and esbuild for production builds. Development and production environments are handled through environment-specific configurations.
+**Maintained Interface**: All UI components, styling, and user interactions remain identical to ensure a consistent user experience during the Python migration.
 
 ### Data Storage Solutions
 
