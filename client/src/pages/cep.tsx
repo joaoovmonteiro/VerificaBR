@@ -1,7 +1,7 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import CepValidator from "@/components/validation/cep-validator";
-import AdPlaceholder from "@/components/ui/ad-placeholder";
+import AdSenseBanner from "@/components/ui/adsense-banner";
 import { Link } from "wouter";
 
 export default function CepPage() {
@@ -146,18 +146,16 @@ export default function CepPage() {
         </div>
       </section>
       
-      {/* AdSense Placement - Middle */}
-      <AdPlaceholder 
+      {/* AdSense Banner - Middle */}
+      <AdSenseBanner 
         type="square" 
-        description="[ Espaço para Anúncio AdSense - Square Banner ]"
-        dimensions="300x250 ou 336x280"
+        slot="cep-middle-square"
       />
       
-      {/* AdSense Placement - Before Footer */}
-      <AdPlaceholder 
+      {/* AdSense Banner - Footer */}
+      <AdSenseBanner 
         type="horizontal" 
-        description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"
-        dimensions="728x90 ou 320x50 (responsivo)"
+        slot="cep-footer-banner"
       />
       
       <Footer />

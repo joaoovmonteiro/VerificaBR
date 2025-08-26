@@ -1,7 +1,7 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import ToolCard from "@/components/validation/tool-card";
-import AdPlaceholder from "@/components/ui/ad-placeholder";
+import AdSenseBanner from "@/components/ui/adsense-banner";
 
 export default function Home() {
   const validationTools = [
@@ -75,11 +75,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AdSense Placeholder */}
-      <AdPlaceholder 
+      {/* AdSense Banner - Top */}
+      <AdSenseBanner 
         type="horizontal" 
-        description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"
-        dimensions="728x90 ou 320x50 (responsivo)"
+        slot="home-top-banner"
       />
 
       {/* Tools Grid */}
@@ -108,11 +107,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AdSense Placement - Above Features */}
-      <AdPlaceholder 
+      {/* AdSense Banner - Middle */}
+      <AdSenseBanner 
         type="horizontal" 
-        description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"
-        dimensions="728x90 ou 320x50 (responsivo)"
+        slot="home-middle-banner"
       />
 
       {/* Features Section */}
@@ -338,18 +336,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Additional AdSense Placement - Before Contact */}
-      <AdPlaceholder 
+      {/* AdSense Banner - Sidebar */}
+      <AdSenseBanner 
         type="square" 
-        description="[ Espaço para Anúncio AdSense - Square Banner ]"
-        dimensions="300x250 ou 336x280"
+        slot="home-sidebar-square"
       />
 
-      {/* Final AdSense Placement - Before Footer */}
-      <AdPlaceholder 
+      {/* AdSense Banner - Footer */}
+      <AdSenseBanner 
         type="horizontal" 
-        description="[ Espaço para Anúncio AdSense - Horizontal Banner ]"
-        dimensions="728x90 ou 320x50 (responsivo)"
+        slot="home-footer-banner"
       />
 
       <Footer />
