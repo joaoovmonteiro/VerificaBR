@@ -14,14 +14,20 @@ export default function ToolCard({ title, description, icon, bgColor, iconColor,
   return (
     <Link href={href}>
       <div 
-        className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 cursor-pointer"
+        className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 cursor-pointer border border-slate-200 hover:border-slate-300"
         {...props}
       >
-        <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center mb-4`}>
-          <i className={`${icon} ${iconColor} text-xl`}></i>
+        <div className={`w-16 h-16 ${bgColor} rounded-2xl flex items-center justify-center mb-6 mx-auto`}>
+          <i className={`${icon} ${iconColor} text-2xl`}></i>
         </div>
-        <h4 className="text-lg font-semibold text-slate-900 mb-2">{title}</h4>
-        <p className="text-slate-600 text-sm">{description}</p>
+        <h4 className="text-xl font-semibold text-slate-900 mb-3 text-center">{title}</h4>
+        <p className="text-slate-600 text-sm text-center leading-relaxed">{description}</p>
+        <div className="mt-6 text-center">
+          <span className="inline-flex items-center px-4 py-2 bg-slate-50 rounded-lg text-sm text-slate-700 font-medium">
+            Usar Validador
+            <i className="fas fa-arrow-right ml-2 text-xs"></i>
+          </span>
+        </div>
       </div>
     </Link>
   );

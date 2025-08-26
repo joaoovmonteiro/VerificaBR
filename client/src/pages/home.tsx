@@ -43,35 +43,6 @@ export default function Home() {
     },
   ];
 
-  const conversionTools = [
-    {
-      id: 'conversor-pdf' as const,
-      title: 'Word para PDF',
-      description: 'Converta documentos Word (.docx, .doc) para PDF mantendo formatação',
-      icon: 'fas fa-file-pdf',
-      bgColor: 'bg-red-100',
-      iconColor: 'text-red-600',
-      href: '/conversor-pdf',
-    },
-    {
-      id: 'conversor-word' as const,
-      title: 'PDF para Word',
-      description: 'Transforme PDFs em documentos Word editáveis com OCR avançado',
-      icon: 'fas fa-file-word',
-      bgColor: 'bg-blue-100',
-      iconColor: 'text-blue-600',
-      href: '/conversor-word',
-    },
-    {
-      id: 'conversor-imagem' as const,
-      title: 'Conversor Imagens',
-      description: 'Converta entre JPG, PNG, WebP, GIF e outros formatos de imagem',
-      icon: 'fas fa-image',
-      bgColor: 'bg-purple-100',
-      iconColor: 'text-purple-600',
-      href: '/conversor-imagem',
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
@@ -114,62 +85,25 @@ export default function Home() {
       {/* Tools Grid */}
       <section id="ferramentas" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold text-center text-slate-900 mb-4">Suas Ferramentas Online</h3>
-          <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-            Validadores e conversores profissionais para suas necessidades diárias. Tudo gratuito, rápido e seguro.
+          <h3 className="text-3xl font-bold text-center text-slate-900 mb-4">Validadores Profissionais</h3>
+          <p className="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
+            Ferramentas de validação confiáveis para documentos brasileiros e dados pessoais. 
+            Validação instantânea com algoritmos oficiais, totalmente gratuito e seguro.
           </p>
           
-          {/* Validation Tools */}
-          <div className="mb-12">
-            <h4 className="text-xl font-semibold text-slate-900 mb-6 text-center">
-              <i className="fas fa-check-circle text-green-600 mr-2"></i>
-              Validadores
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {validationTools.map((tool) => (
-                <ToolCard
-                  key={tool.id}
-                  title={tool.title}
-                  description={tool.description}
-                  icon={tool.icon}
-                  bgColor={tool.bgColor}
-                  iconColor={tool.iconColor}
-                  href={tool.href}
-                  data-testid={`card-tool-${tool.id}`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* AdSense Placement - Between Tool Sections */}
-          <div className="my-12">
-            <AdPlaceholder 
-              type="square" 
-              description="[ Espaço para Anúncio AdSense - Square Banner ]"
-              dimensions="300x250 ou 336x280"
-            />
-          </div>
-          
-          {/* Conversion Tools */}
-          <div>
-            <h4 className="text-xl font-semibold text-slate-900 mb-6 text-center">
-              <i className="fas fa-exchange-alt text-blue-600 mr-2"></i>
-              Conversores de Arquivo
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {conversionTools.map((tool) => (
-                <ToolCard
-                  key={tool.id}
-                  title={tool.title}
-                  description={tool.description}
-                  icon={tool.icon}
-                  bgColor={tool.bgColor}
-                  iconColor={tool.iconColor}
-                  href={tool.href}
-                  data-testid={`card-tool-${tool.id}`}
-                />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {validationTools.map((tool) => (
+              <ToolCard
+                key={tool.id}
+                title={tool.title}
+                description={tool.description}
+                icon={tool.icon}
+                bgColor={tool.bgColor}
+                iconColor={tool.iconColor}
+                href={tool.href}
+                data-testid={`card-tool-${tool.id}`}
+              />
+            ))}
           </div>
         </div>
       </section>

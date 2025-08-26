@@ -59,27 +59,6 @@ export default function Header() {
                   </Link>
                 </DropdownMenuItem>
                 
-                <div className="px-2 py-1 text-xs font-semibold text-slate-500 uppercase tracking-wide mt-2 border-t">
-                  Conversores
-                </div>
-                <DropdownMenuItem asChild>
-                  <Link href="/conversor-pdf" className="flex items-center space-x-2 cursor-pointer" data-testid="link-conversor-pdf">
-                    <i className="fas fa-file-pdf text-red-600 w-4"></i>
-                    <span>Word para PDF</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/conversor-word" className="flex items-center space-x-2 cursor-pointer" data-testid="link-conversor-word">
-                    <i className="fas fa-file-word text-blue-600 w-4"></i>
-                    <span>PDF para Word</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/conversor-imagem" className="flex items-center space-x-2 cursor-pointer" data-testid="link-conversor-imagem">
-                    <i className="fas fa-image text-purple-600 w-4"></i>
-                    <span>Conversor Imagens</span>
-                  </Link>
-                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <a href="#sobre" className="text-slate-600 hover:text-blue-600 transition-colors" data-testid="link-about">Sobre</a>
@@ -119,22 +98,6 @@ export default function Header() {
                 <i className="fas fa-envelope text-orange-600 w-4"></i>
                 <span>Validador Email</span>
               </Link>
-              
-              <div className="border-t border-slate-200 pt-3 mt-3">
-                <div className="text-slate-900 font-medium mb-2">Conversores:</div>
-                <Link href="/conversor-pdf" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-colors mb-2" data-testid="mobile-link-conversor-pdf">
-                  <i className="fas fa-file-pdf text-red-600 w-4"></i>
-                  <span>Word para PDF</span>
-                </Link>
-                <Link href="/conversor-word" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-colors mb-2" data-testid="mobile-link-conversor-word">
-                  <i className="fas fa-file-word text-blue-600 w-4"></i>
-                  <span>PDF para Word</span>
-                </Link>
-                <Link href="/conversor-imagem" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 transition-colors" data-testid="mobile-link-conversor-imagem">
-                  <i className="fas fa-image text-purple-600 w-4"></i>
-                  <span>Conversor Imagens</span>
-                </Link>
-              </div>
               
               <div className="border-t border-slate-200 pt-3 mt-3">
                 <a href="#sobre" className="block text-slate-600 hover:text-blue-600 transition-colors mb-2" data-testid="mobile-link-about">Sobre</a>

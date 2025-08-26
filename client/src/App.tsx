@@ -9,9 +9,6 @@ import CpfCnpjPage from "@/pages/cpf-cnpj";
 import TelefonePage from "@/pages/telefone";
 import CepPage from "@/pages/cep";
 import EmailPage from "@/pages/email";
-import ConversorPdfPage from "@/pages/conversor-pdf";
-import ConversorWordPage from "@/pages/conversor-word";
-import ConversorImagemPage from "@/pages/conversor-imagem";
 
 function Router() {
   return (
@@ -21,9 +18,6 @@ function Router() {
       <Route path="/telefone" component={TelefonePage} />
       <Route path="/cep" component={CepPage} />
       <Route path="/email" component={EmailPage} />
-      <Route path="/conversor-pdf" component={ConversorPdfPage} />
-      <Route path="/conversor-word" component={ConversorWordPage} />
-      <Route path="/conversor-imagem" component={ConversorImagemPage} />
       <Route component={NotFound} />
     </Switch>
   );
