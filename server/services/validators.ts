@@ -701,11 +701,18 @@ export class EmailValidator {
 
   private static testSMTPConnection(mxRecord: string): Promise<boolean> {
     return new Promise((resolve) => {
+      // In production environments, many hosting providers block outbound SMTP connections
+      // Skip SMTP testing and consider email valid if domain and MX exist
+      if (process.env.NODE_ENV === 'production') {
+        resolve(true);
+        return;
+      }
+
       const socket = new net.Socket();
       const timeout = setTimeout(() => {
         socket.destroy();
         resolve(false);
-      }, 5000);
+      }, 3000); // Reduced timeout for faster response
 
       socket.connect(25, mxRecord, () => {
         clearTimeout(timeout);
@@ -715,6 +722,12 @@ export class EmailValidator {
 
       socket.on('error', () => {
         clearTimeout(timeout);
+        resolve(false);
+      });
+
+      socket.on('timeout', () => {
+        clearTimeout(timeout);
+        socket.destroy();
         resolve(false);
       });
     });

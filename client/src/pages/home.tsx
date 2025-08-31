@@ -348,6 +348,107 @@ export default function Home() {
         slot="home-footer-banner"
       />
 
+      {/* FAQ Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">Perguntas Frequentes sobre Validação de Documentos</h3>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Encontre respostas para as dúvidas mais comuns sobre validação de CPF, CNPJ, telefones, CEP e emails no Brasil.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h4 className="text-xl font-semibold text-slate-900 mb-3">
+                <i className="fas fa-id-card text-blue-600 mr-2"></i>
+                Como funciona a validação de CPF?
+              </h4>
+              <p className="text-slate-600 mb-4">
+                O ValidaBR utiliza o algoritmo oficial da Receita Federal para validar CPFs. Verificamos os dígitos verificadores, 
+                detectamos sequências inválidas como 111.111.111-11 e formatamos automaticamente o número.
+              </p>
+              <p className="text-slate-600">
+                O processo é instantâneo e garante 100% de precisão na verificação matemática do documento, 
+                seguindo as especificações oficiais brasileiras.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h4 className="text-xl font-semibold text-slate-900 mb-3">
+                <i className="fas fa-building text-green-600 mr-2"></i>
+                CNPJ também é validado?
+              </h4>
+              <p className="text-slate-600 mb-4">
+                Sim! Validamos CNPJs usando o algoritmo oficial com verificação dos dois dígitos verificadores. 
+                O sistema detecta automaticamente se o documento é CPF (11 dígitos) ou CNPJ (14 dígitos).
+              </p>
+              <p className="text-slate-600">
+                Formatamos no padrão 00.000.000/0000-00 e verificamos sequências inválidas como 00.000.000/0000-00.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h4 className="text-xl font-semibold text-slate-900 mb-3">
+                <i className="fas fa-phone text-purple-600 mr-2"></i>
+                Quais tipos de telefone são suportados?
+              </h4>
+              <p className="text-slate-600 mb-4">
+                Validamos celulares (11 dígitos com 9º dígito), telefones fixos (10 dígitos), 
+                números 0800 gratuitos e 4004 de atendimento. Todos os DDDs brasileiros são reconhecidos.
+              </p>
+              <p className="text-slate-600">
+                Identificamos automaticamente a operadora (Vivo, TIM, Claro, Oi) e o estado de origem 
+                baseado no DDD fornecido.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h4 className="text-xl font-semibold text-slate-900 mb-3">
+                <i className="fas fa-map-marker-alt text-orange-600 mr-2"></i>
+                Como funciona a consulta de CEP?
+              </h4>
+              <p className="text-slate-600 mb-4">
+                Conectamos diretamente à API oficial dos Correios (ViaCEP) para buscar endereços completos. 
+                Retornamos logradouro, bairro, cidade, estado e código IBGE quando disponível.
+              </p>
+              <p className="text-slate-600">
+                A consulta é feita em tempo real e os dados estão sempre atualizados conforme a base oficial brasileira.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h4 className="text-xl font-semibold text-slate-900 mb-3">
+                <i className="fas fa-envelope text-red-600 mr-2"></i>
+                O que verifica a validação de email?
+              </h4>
+              <p className="text-slate-600 mb-4">
+                Realizamos validação completa: sintaxe RFC5322, existência do domínio, registros MX, 
+                conectividade SMTP, detecção de emails descartáveis e identificação de emails de função.
+              </p>
+              <p className="text-slate-600">
+                Sugerimos correções para domínios populares quando detectamos possíveis erros de digitação.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border">
+              <h4 className="text-xl font-semibold text-slate-900 mb-3">
+                <i className="fas fa-shield-alt text-indigo-600 mr-2"></i>
+                Os dados são armazenados?
+              </h4>
+              <p className="text-slate-600 mb-4">
+                Não! Todos os dados são processados em tempo real e descartados imediatamente após a validação. 
+                Não mantemos histórico, logs ou qualquer registro dos documentos validados.
+              </p>
+              <p className="text-slate-600">
+                Sua privacidade é nossa prioridade. Utilizamos conexões criptografadas e processamento local 
+                sempre que possível.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

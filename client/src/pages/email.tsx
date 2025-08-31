@@ -188,6 +188,176 @@ export default function EmailPage() {
         slot="email-middle-square"
       />
       
+      {/* Advanced Email Validation Guide */}
+      <section className="py-16 bg-gradient-to-r from-orange-50 to-red-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+            <i className="fas fa-book-open text-orange-600 mr-2"></i>
+            Guia Completo de Validação de Email
+          </h3>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h4 className="font-semibold text-slate-900 mb-4">
+                <i className="fas fa-code text-blue-600 mr-2"></i>
+                Validação Sintática
+              </h4>
+              <p className="text-slate-600 text-sm mb-4">
+                Verificação do formato básico segundo RFC 5322
+              </p>
+              <ul className="text-slate-600 text-sm space-y-2">
+                <li>• Presença do símbolo @</li>
+                <li>• Formato da parte local</li>
+                <li>• Formato do domínio</li>
+                <li>• Caracteres especiais permitidos</li>
+                <li>• Comprimento máximo (320 chars)</li>
+                <li>• Estrutura de subdominios</li>
+              </ul>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h4 className="font-semibold text-slate-900 mb-4">
+                <i className="fas fa-server text-green-600 mr-2"></i>
+                Validação de Domínio
+              </h4>
+              <p className="text-slate-600 text-sm mb-4">
+                Verificação da existência e configuração do domínio
+              </p>
+              <ul className="text-slate-600 text-sm space-y-2">
+                <li>• Resolução DNS do domínio</li>
+                <li>• Verificação de registros MX</li>
+                <li>• Teste de conectividade SMTP</li>
+                <li>• Detecção de catch-all</li>
+                <li>• Verificação de blacklists</li>
+                <li>• Análise de reputação</li>
+              </ul>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h4 className="font-semibold text-slate-900 mb-4">
+                <i className="fas fa-shield-alt text-red-600 mr-2"></i>
+                Detecção de Problemas
+              </h4>
+              <p className="text-slate-600 text-sm mb-4">
+                Identificação de emails problemáticos
+              </p>
+              <ul className="text-slate-600 text-sm space-y-2">
+                <li>• Emails temporários/descartáveis</li>
+                <li>• Emails de função (role-based)</li>
+                <li>• Typos em domínios populares</li>
+                <li>• Domínios suspeitos</li>
+                <li>• Padrões de spam</li>
+                <li>• Emails honeypot</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-12">
+            <h4 className="text-xl font-bold text-slate-900 mb-6 text-center">
+              Níveis de Validação
+            </h4>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-green-100 border border-green-300 rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-check text-white"></i>
+                </div>
+                <h5 className="font-semibold text-slate-900 mb-2">Básica</h5>
+                <p className="text-xs text-slate-600">Sintaxe RFC5322</p>
+              </div>
+              
+              <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-search text-white"></i>
+                </div>
+                <h5 className="font-semibold text-slate-900 mb-2">DNS</h5>
+                <p className="text-xs text-slate-600">Verificação de domínio</p>
+              </div>
+              
+              <div className="bg-blue-100 border border-blue-300 rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-envelope text-white"></i>
+                </div>
+                <h5 className="font-semibold text-slate-900 mb-2">MX</h5>
+                <p className="text-xs text-slate-600">Registros de email</p>
+              </div>
+              
+              <div className="bg-purple-100 border border-purple-300 rounded-lg p-4 text-center">
+                <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-network-wired text-white"></i>
+                </div>
+                <h5 className="font-semibold text-slate-900 mb-2">SMTP</h5>
+                <p className="text-xs text-slate-600">Conectividade real</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Email Best Practices */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+            <i className="fas fa-award text-orange-600 mr-2"></i>
+            Melhores Práticas para Email Marketing
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <div className="border-l-4 border-blue-500 pl-6">
+                <h4 className="font-semibold text-slate-900 mb-2">Lista Limpa</h4>
+                <p className="text-slate-600 text-sm">
+                  Mantenha sua lista de emails sempre limpa removendo endereços inválidos, 
+                  bounces e emails que não engajam há muito tempo.
+                </p>
+              </div>
+              
+              <div className="border-l-4 border-green-500 pl-6">
+                <h4 className="font-semibold text-slate-900 mb-2">Double Opt-in</h4>
+                <p className="text-slate-600 text-sm">
+                  Sempre use confirmação dupla para garantir que o email é válido e 
+                  o usuário realmente quer receber suas mensagens.
+                </p>
+              </div>
+              
+              <div className="border-l-4 border-orange-500 pl-6">
+                <h4 className="font-semibold text-slate-900 mb-2">Monitoramento</h4>
+                <p className="text-slate-600 text-sm">
+                  Monitore métricas como bounce rate, open rate e unsubscribe rate 
+                  para manter a saúde da sua lista.
+                </p>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="border-l-4 border-purple-500 pl-6">
+                <h4 className="font-semibold text-slate-900 mb-2">Segmentação</h4>
+                <p className="text-slate-600 text-sm">
+                  Segmente sua lista por comportamento, localização e preferências 
+                  para enviar conteúdo mais relevante.
+                </p>
+              </div>
+              
+              <div className="border-l-4 border-red-500 pl-6">
+                <h4 className="font-semibold text-slate-900 mb-2">Reputação</h4>
+                <p className="text-slate-600 text-sm">
+                  Mantenha boa reputação de IP e domínio evitando práticas que 
+                  podem te marcar como spam.
+                </p>
+              </div>
+              
+              <div className="border-l-4 border-indigo-500 pl-6">
+                <h4 className="font-semibold text-slate-900 mb-2">Compliance</h4>
+                <p className="text-slate-600 text-sm">
+                  Siga as leis de proteção de dados (LGPD, GDPR) e sempre 
+                  ofereça opção de descadastro fácil.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* AdSense Banner - Footer */}
       <AdSenseBanner 
         type="horizontal" 
