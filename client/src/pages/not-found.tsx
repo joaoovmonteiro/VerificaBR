@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
+import AdSenseBanner from "@/components/ui/adsense-banner";
 
 export default function NotFound() {
   return (
@@ -16,6 +17,12 @@ export default function NotFound() {
           </p>
         </CardContent>
       </Card>
+      
+      {/* AdSense Banner */}
+      <AdSenseBanner 
+        type="horizontal" 
+        slot="404-banner"
+      />
     </div>
   );
 }
