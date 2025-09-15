@@ -1,0 +1,772 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValidaBR - Ferramentas de Validação Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 1s infinite',
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans">
+    <!-- @COMPONENT: Header -->
+    <header class="bg-white shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-check-double text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-slate-900">ValidaBR</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#ferramentas" class="text-slate-600 hover:text-blue-600 transition-colors">Ferramentas</a>
+                    <a href="#sobre" class="text-slate-600 hover:text-blue-600 transition-colors">Sobre</a>
+                    <a href="#contato" class="text-slate-600 hover:text-blue-600 transition-colors">Contato</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+                Validação Rápida e Confiável
+            </h2>
+            <p class="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
+                Ferramentas profissionais para validar CPF, CNPJ, telefone, CEP e email. 
+                Rápido, seguro e totalmente gratuito.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-green-500"></i>
+                    <span>100% Seguro</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-bolt text-yellow-500"></i>
+                    <span>Validação Instantânea</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-mobile-alt text-blue-500"></i>
+                    <span>Mobile Friendly</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- AdSense Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+            <p class="text-gray-500 text-sm">[ Espaço para Anúncio AdSense - Horizontal Banner ]</p>
+            <p class="text-gray-400 text-xs mt-1">728x90 ou 320x50 (responsivo)</p>
+        </div>
+    </div>
+
+    <!-- @COMPONENT: Tools Grid -->
+    <section id="ferramentas" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-center text-slate-900 mb-12">Escolha sua Ferramenta</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- CPF/CNPJ Card -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 cursor-pointer tool-card" data-tool="cpf-cnpj">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-id-card text-blue-600 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-slate-900 mb-2">CPF / CNPJ</h4>
+                    <p class="text-slate-600 text-sm">Valide documentos brasileiros com algoritmo oficial de dígitos verificadores</p>
+                </div>
+
+                <!-- Phone Card -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 cursor-pointer tool-card" data-tool="telefone">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-phone text-green-600 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-slate-900 mb-2">Telefone</h4>
+                    <p class="text-slate-600 text-sm">Verifica números brasileiros e internacionais com detecção de operadora</p>
+                </div>
+
+                <!-- CEP Card -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 cursor-pointer tool-card" data-tool="cep">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-map-marker-alt text-purple-600 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-slate-900 mb-2">CEP</h4>
+                    <p class="text-slate-600 text-sm">Consulta endereço completo via API dos Correios e ViaCEP</p>
+                </div>
+
+                <!-- Email Card -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 cursor-pointer tool-card" data-tool="email">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-envelope text-orange-600 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-slate-900 mb-2">Email</h4>
+                    <p class="text-slate-600 text-sm">Validação completa com DNS, MX, SMTP e detecção de domínios descartáveis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Tools Grid -->
+
+    <!-- @COMPONENT: CPF/CNPJ Validator -->
+    <section id="cpf-cnpj-section" class="tool-section hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-id-card text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Validador de CPF/CNPJ</h3>
+                    <p class="text-slate-600">Digite o número para validação com algoritmo oficial</p>
+                </div>
+
+                <div class="max-w-md mx-auto">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Número do Documento</label>
+                        <input type="text" id="cpf-cnpj-input" placeholder="000.000.000-00 ou 00.000.000/0000-00" 
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                    </div>
+                    
+                    <button id="validate-cpf-cnpj" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        <span class="btn-text">Validar Documento</span>
+                        <i class="fas fa-spinner fa-spin hidden btn-loading"></i>
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div id="cpf-cnpj-result" class="mt-8 hidden">
+                    <div class="result-card p-6 rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="result-icon w-8 h-8 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 result-title">Documento Válido</h4>
+                                    <p class="text-sm text-slate-600 result-type">CPF</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-details space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Número:</span>
+                                <span class="font-medium text-slate-900 result-number">000.000.000-00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Tipo:</span>
+                                <span class="font-medium text-slate-900 result-doc-type">CPF</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Status:</span>
+                                <span class="result-status-badge px-2 py-1 rounded-full text-xs font-medium">Válido</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button class="back-btn text-slate-600 hover:text-slate-900 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Voltar às Ferramentas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CPF/CNPJ Validator -->
+
+    <!-- @COMPONENT: Phone Validator -->
+    <section id="telefone-section" class="tool-section hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-phone text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Validador de Telefone</h3>
+                    <p class="text-slate-600">Valide números brasileiros e internacionais</p>
+                </div>
+
+                <div class="max-w-md mx-auto">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Tipo de Número</label>
+                        <select id="phone-type" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <option value="br">Brasileiro</option>
+                            <option value="international">Internacional</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Número do Telefone</label>
+                        <input type="text" id="phone-input" placeholder="(11) 99999-9999" 
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors">
+                    </div>
+                    
+                    <button id="validate-phone" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                        <span class="btn-text">Validar Telefone</span>
+                        <i class="fas fa-spinner fa-spin hidden btn-loading"></i>
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div id="phone-result" class="mt-8 hidden">
+                    <div class="result-card p-6 rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="result-icon w-8 h-8 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 result-title">Número Válido</h4>
+                                    <p class="text-sm text-slate-600 result-carrier">Operadora identificada</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-details space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Número:</span>
+                                <span class="font-medium text-slate-900 result-formatted">(11) 99999-9999</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Tipo:</span>
+                                <span class="font-medium text-slate-900 result-phone-type">Celular</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">DDD:</span>
+                                <span class="font-medium text-slate-900 result-area-code">11 - São Paulo</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Operadora:</span>
+                                <span class="font-medium text-slate-900 result-operator">Vivo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button class="back-btn text-slate-600 hover:text-slate-900 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Voltar às Ferramentas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Phone Validator -->
+
+    <!-- AdSense Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+            <p class="text-gray-500 text-sm">[ Espaço para Anúncio AdSense - Square Banner ]</p>
+            <p class="text-gray-400 text-xs mt-1">300x250</p>
+        </div>
+    </div>
+
+    <!-- @COMPONENT: CEP Validator -->
+    <section id="cep-section" class="tool-section hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marker-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Consulta de CEP</h3>
+                    <p class="text-slate-600">Encontre endereço completo via API dos Correios</p>
+                </div>
+
+                <div class="max-w-md mx-auto">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">CEP</label>
+                        <input type="text" id="cep-input" placeholder="00000-000" 
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors">
+                    </div>
+                    
+                    <button id="validate-cep" class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                        <span class="btn-text">Consultar CEP</span>
+                        <i class="fas fa-spinner fa-spin hidden btn-loading"></i>
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div id="cep-result" class="mt-8 hidden">
+                    <div class="result-card p-6 rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="result-icon w-8 h-8 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 result-title">CEP Encontrado</h4>
+                                    <p class="text-sm text-slate-600">Endereço localizado</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-details space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">CEP:</span>
+                                <span class="font-medium text-slate-900 result-cep">00000-000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Logradouro:</span>
+                                <span class="font-medium text-slate-900 result-street">Rua Exemplo</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Bairro:</span>
+                                <span class="font-medium text-slate-900 result-neighborhood">Centro</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Cidade:</span>
+                                <span class="font-medium text-slate-900 result-city">São Paulo</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">UF:</span>
+                                <span class="font-medium text-slate-900 result-state">SP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button class="back-btn text-slate-600 hover:text-slate-900 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Voltar às Ferramentas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: CEP Validator -->
+
+    <!-- @COMPONENT: Email Validator -->
+    <section id="email-section" class="tool-section hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Validador de Email</h3>
+                    <p class="text-slate-600">Validação completa com DNS, MX e detecção de spam</p>
+                </div>
+
+                <div class="max-w-md mx-auto">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Endereço de Email</label>
+                        <input type="email" id="email-input" placeholder="exemplo@dominio.com" 
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors">
+                    </div>
+                    
+                    <button id="validate-email" class="w-full bg-orange-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-orange-700 transition-colors">
+                        <span class="btn-text">Validar Email</span>
+                        <i class="fas fa-spinner fa-spin hidden btn-loading"></i>
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div id="email-result" class="mt-8 hidden">
+                    <div class="result-card p-6 rounded-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="result-icon w-8 h-8 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 result-title">Email Válido</h4>
+                                    <p class="text-sm text-slate-600">Verificação completa realizada</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="result-details space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Email:</span>
+                                <span class="font-medium text-slate-900 result-email">exemplo@dominio.com</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Domínio:</span>
+                                <span class="font-medium text-slate-900 result-domain">dominio.com</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">MX Records:</span>
+                                <span class="result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Válido</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">Descartável:</span>
+                                <span class="result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Não</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-600">SMTP:</span>
+                                <span class="result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Conectável</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button class="back-btn text-slate-600 hover:text-slate-900 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Voltar às Ferramentas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Email Validator -->
+
+    <!-- AdSense Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+            <p class="text-gray-500 text-sm">[ Espaço para Anúncio AdSense - Horizontal Banner ]</p>
+            <p class="text-gray-400 text-xs mt-1">728x90 ou 320x50 (responsivo)</p>
+        </div>
+    </div>
+
+    <!-- @COMPONENT: Features Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-center text-slate-900 mb-12">Por que escolher ValidaBR?</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-rocket text-blue-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-slate-900 mb-2">Rápido e Eficiente</h4>
+                    <p class="text-slate-600">Validação em tempo real com algoritmos otimizados para máxima performance</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-slate-900 mb-2">100% Seguro</h4>
+                    <p class="text-slate-600">Seus dados não são armazenados. Processamento local e conexões criptografadas</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-slate-900 mb-2">Mobile First</h4>
+                    <p class="text-slate-600">Interface responsiva otimizada para todos os dispositivos e tamanhos de tela</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Features Section -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-check-double text-white text-sm"></i>
+                        </div>
+                        <h4 class="text-xl font-bold">ValidaBR</h4>
+                    </div>
+                    <p class="text-slate-400">Ferramentas profissionais de validação para CPF, CNPJ, telefone, CEP e email.</p>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">Ferramentas</h5>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Validador CPF/CNPJ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Validador Telefone</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Consulta CEP</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Validador Email</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">Contato</h5>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><i class="fas fa-envelope mr-2"></i> contato@validabr.com</li>
+                        <li><i class="fas fa-shield-alt mr-2"></i> Política de Privacidade</li>
+                        <li><i class="fas fa-file-alt mr-2"></i> Termos de Uso</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
+                <p>&copy; 2024 ValidaBR. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        (function() {
+            // Tool navigation functionality
+            const toolCards = document.querySelectorAll('.tool-card');
+            const toolSections = document.querySelectorAll('.tool-section');
+            const backButtons = document.querySelectorAll('.back-btn');
+            const ferramentasSection = document.getElementById('ferramentas');
+
+            // Show specific tool section
+            function showToolSection(toolName) {
+                // Hide all tool sections
+                toolSections.forEach(section => section.classList.add('hidden'));
+                // Hide ferramentas section
+                ferramentasSection.style.display = 'none';
+                // Show specific tool section
+                const targetSection = document.getElementById(`${toolName}-section`);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+            }
+
+            // Show main tools grid
+            function showMainGrid() {
+                toolSections.forEach(section => section.classList.add('hidden'));
+                ferramentasSection.style.display = 'block';
+            }
+
+            // Add click listeners to tool cards
+            toolCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const toolName = card.dataset.tool;
+                    showToolSection(toolName);
+                });
+            });
+
+            // Add click listeners to back buttons
+            backButtons.forEach(button => {
+                button.addEventListener('click', showMainGrid);
+            });
+
+            // Mock validation functions with realistic delays
+            function simulateValidation(buttonId, resultId, validationFn) {
+                const button = document.getElementById(buttonId);
+                const result = document.getElementById(resultId);
+                
+                button.addEventListener('click', () => {
+                    // Show loading state
+                    const btnText = button.querySelector('.btn-text');
+                    const btnLoading = button.querySelector('.btn-loading');
+                    
+                    btnText.classList.add('hidden');
+                    btnLoading.classList.remove('hidden');
+                    button.disabled = true;
+                    
+                    // Hide previous results
+                    result.classList.add('hidden');
+                    
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        validationFn(result);
+                        
+                        // Hide loading state
+                        btnText.classList.remove('hidden');
+                        btnLoading.classList.add('hidden');
+                        button.disabled = false;
+                        
+                        // Show results
+                        result.classList.remove('hidden');
+                    }, 1500 + Math.random() * 1000); // 1.5-2.5 second delay
+                });
+            }
+
+            // CPF/CNPJ Validation
+            simulateValidation('validate-cpf-cnpj', 'cpf-cnpj-result', (resultElement) => {
+                const input = document.getElementById('cpf-cnpj-input').value;
+                const isValid = Math.random() > 0.3; // 70% success rate for demo
+                
+                const resultCard = resultElement.querySelector('.result-card');
+                const resultIcon = resultElement.querySelector('.result-icon');
+                const resultTitle = resultElement.querySelector('.result-title');
+                const resultNumber = resultElement.querySelector('.result-number');
+                const resultDocType = resultElement.querySelector('.result-doc-type');
+                const resultStatusBadge = resultElement.querySelector('.result-status-badge');
+                
+                if (isValid) {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-green-50 border border-green-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-green-500';
+                    resultTitle.textContent = 'Documento Válido';
+                    resultNumber.textContent = input || '000.000.000-00';
+                    resultDocType.textContent = input.length > 14 ? 'CNPJ' : 'CPF';
+                    resultStatusBadge.className = 'result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800';
+                    resultStatusBadge.textContent = 'Válido';
+                } else {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-red-50 border border-red-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-red-500';
+                    resultIcon.innerHTML = '<i class="fas fa-times text-white text-sm"></i>';
+                    resultTitle.textContent = 'Documento Inválido';
+                    resultNumber.textContent = input || '000.000.000-00';
+                    resultDocType.textContent = 'Formato inválido';
+                    resultStatusBadge.className = 'result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800';
+                    resultStatusBadge.textContent = 'Inválido';
+                }
+            });
+
+            // Phone Validation
+            simulateValidation('validate-phone', 'phone-result', (resultElement) => {
+                const input = document.getElementById('phone-input').value;
+                const isValid = Math.random() > 0.2; // 80% success rate for demo
+                
+                const resultCard = resultElement.querySelector('.result-card');
+                const resultIcon = resultElement.querySelector('.result-icon');
+                const resultTitle = resultElement.querySelector('.result-title');
+                const resultFormatted = resultElement.querySelector('.result-formatted');
+                const resultPhoneType = resultElement.querySelector('.result-phone-type');
+                const resultAreaCode = resultElement.querySelector('.result-area-code');
+                const resultOperator = resultElement.querySelector('.result-operator');
+                
+                if (isValid) {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-green-50 border border-green-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-green-500';
+                    resultTitle.textContent = 'Número Válido';
+                    resultFormatted.textContent = input || '(11) 99999-9999';
+                    resultPhoneType.textContent = 'Celular';
+                    resultAreaCode.textContent = '11 - São Paulo';
+                    resultOperator.textContent = ['Vivo', 'Claro', 'TIM', 'Oi'][Math.floor(Math.random() * 4)];
+                } else {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-red-50 border border-red-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-red-500';
+                    resultIcon.innerHTML = '<i class="fas fa-times text-white text-sm"></i>';
+                    resultTitle.textContent = 'Número Inválido';
+                    resultFormatted.textContent = input || 'Formato inválido';
+                    resultPhoneType.textContent = 'N/A';
+                    resultAreaCode.textContent = 'DDD inválido';
+                    resultOperator.textContent = 'N/A';
+                }
+            });
+
+            // CEP Validation
+            simulateValidation('validate-cep', 'cep-result', (resultElement) => {
+                const input = document.getElementById('cep-input').value;
+                const isValid = Math.random() > 0.25; // 75% success rate for demo
+                
+                const resultCard = resultElement.querySelector('.result-card');
+                const resultIcon = resultElement.querySelector('.result-icon');
+                const resultTitle = resultElement.querySelector('.result-title');
+                const resultCep = resultElement.querySelector('.result-cep');
+                const resultStreet = resultElement.querySelector('.result-street');
+                const resultNeighborhood = resultElement.querySelector('.result-neighborhood');
+                const resultCity = resultElement.querySelector('.result-city');
+                const resultState = resultElement.querySelector('.result-state');
+                
+                if (isValid) {
+                    const mockAddresses = [
+                        {street: 'Rua das Flores', neighborhood: 'Centro', city: 'São Paulo', state: 'SP'},
+                        {street: 'Avenida Paulista', neighborhood: 'Bela Vista', city: 'São Paulo', state: 'SP'},
+                        {street: 'Rua Oscar Freire', neighborhood: 'Jardins', city: 'São Paulo', state: 'SP'}
+                    ];
+                    const address = mockAddresses[Math.floor(Math.random() * mockAddresses.length)];
+                    
+                    resultCard.className = 'result-card p-6 rounded-lg bg-green-50 border border-green-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-green-500';
+                    resultTitle.textContent = 'CEP Encontrado';
+                    resultCep.textContent = input || '01310-100';
+                    resultStreet.textContent = address.street;
+                    resultNeighborhood.textContent = address.neighborhood;
+                    resultCity.textContent = address.city;
+                    resultState.textContent = address.state;
+                } else {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-red-50 border border-red-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-red-500';
+                    resultIcon.innerHTML = '<i class="fas fa-times text-white text-sm"></i>';
+                    resultTitle.textContent = 'CEP Não Encontrado';
+                    resultCep.textContent = input || 'CEP inválido';
+                    resultStreet.textContent = 'N/A';
+                    resultNeighborhood.textContent = 'N/A';
+                    resultCity.textContent = 'N/A';
+                    resultState.textContent = 'N/A';
+                }
+            });
+
+            // Email Validation
+            simulateValidation('validate-email', 'email-result', (resultElement) => {
+                const input = document.getElementById('email-input').value;
+                const isValid = Math.random() > 0.3; // 70% success rate for demo
+                
+                const resultCard = resultElement.querySelector('.result-card');
+                const resultIcon = resultElement.querySelector('.result-icon');
+                const resultTitle = resultElement.querySelector('.result-title');
+                const resultEmail = resultElement.querySelector('.result-email');
+                const resultDomain = resultElement.querySelector('.result-domain');
+                const statusBadges = resultElement.querySelectorAll('.result-status-badge');
+                
+                if (isValid) {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-green-50 border border-green-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-green-500';
+                    resultTitle.textContent = 'Email Válido';
+                    resultEmail.textContent = input || 'exemplo@dominio.com';
+                    resultDomain.textContent = (input || 'exemplo@dominio.com').split('@')[1];
+                    
+                    statusBadges.forEach(badge => {
+                        badge.className = 'result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800';
+                        if (badge.parentElement.textContent.includes('MX')) badge.textContent = 'Válido';
+                        if (badge.parentElement.textContent.includes('Descartável')) badge.textContent = 'Não';
+                        if (badge.parentElement.textContent.includes('SMTP')) badge.textContent = 'Conectável';
+                    });
+                } else {
+                    resultCard.className = 'result-card p-6 rounded-lg bg-red-50 border border-red-200';
+                    resultIcon.className = 'result-icon w-8 h-8 rounded-full flex items-center justify-center bg-red-500';
+                    resultIcon.innerHTML = '<i class="fas fa-times text-white text-sm"></i>';
+                    resultTitle.textContent = 'Email Inválido';
+                    resultEmail.textContent = input || 'formato inválido';
+                    resultDomain.textContent = 'Domínio inválido';
+                    
+                    statusBadges.forEach(badge => {
+                        badge.className = 'result-status-badge px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800';
+                        badge.textContent = 'Falhou';
+                    });
+                }
+            });
+
+            // Input formatting
+            document.getElementById('cpf-cnpj-input').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 11) {
+                    // CPF format
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                } else {
+                    // CNPJ format
+                    value = value.replace(/(\d{2})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                    value = value.replace(/(\d{3})(\d)/, '$1/$2');
+                    value = value.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+                }
+                e.target.value = value;
+            });
+
+            document.getElementById('phone-input').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 11) {
+                    value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                    value = value.replace(/(\d{4,5})(\d{4})$/, '$1-$2');
+                }
+                e.target.value = value;
+            });
+
+            document.getElementById('cep-input').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 8) {
+                    value = value.replace(/(\d{5})(\d)/, '$1-$2');
+                }
+                e.target.value = value;
+            });
+
+        })();
+    </script>
+</body>
+</html>
