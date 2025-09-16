@@ -143,6 +143,15 @@ async function validateEmail(email: string) {
     // SMTP validation (simplified for serverless)
     const smtpValid = mxExists ? await checkSMTPConnection(domain) : false;
     
+    // Debug info (remove in production)
+    console.log(`Email validation debug for ${domain}:`, {
+      domainExists,
+      mxExists,
+      smtpValid,
+      isDisposable,
+      isRoleBased
+    });
+    
     // Email is valid only if all critical checks pass
     const isValid = domainExists && !isDisposable && mxExists && smtpValid;
 
@@ -269,32 +278,22 @@ async function checkDomainExists(domain: string): Promise<boolean> {
 
 async function checkMXRecords(domain: string): Promise<boolean> {
   try {
-    // Check MX records using DNS over HTTPS
-    const providers = [
-      `https://dns.google/resolve?name=${domain}&type=MX`,
-      `https://cloudflare-dns.com/dns-query?name=${domain}&type=MX`,
-    ];
-    
-    for (const url of providers) {
-      try {
-        const response = await fetch(url, {
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          if (data.Answer && data.Answer.length > 0) {
-            // Check if any MX record has priority > 0
-            const mxRecords = data.Answer.filter((record: any) => record.type === 15);
-            return mxRecords.length > 0;
-          }
-        }
-      } catch (e) {
-        // Continue to next provider
-        continue;
+    // Use Google DNS over HTTPS for MX records
+    const response = await fetch(`https://dns.google/resolve?name=${domain}&type=MX`, {
+      headers: {
+        'Accept': 'application/json'
       }
+    });
+    
+    if (!response.ok) return false;
+    
+    const data = await response.json();
+    
+    // Check if we have MX records
+    if (data.Answer && data.Answer.length > 0) {
+      // Look for MX records (type 15)
+      const mxRecords = data.Answer.filter((record: any) => record.type === 15);
+      return mxRecords.length > 0;
     }
     
     return false;
@@ -318,62 +317,17 @@ async function checkSMTPConnection(domain: string): Promise<boolean> {
     
     const mxHost = mxRecord.data.replace(/\.$/, ''); // Remove trailing dot
     
-    // Try to connect to SMTP server (simplified check)
-    // In serverless environment, we'll use a timeout approach
-    return await checkSMTPPort(mxHost, 25);
-  } catch (error) {
-    return false;
-  }
-}
-
-async function checkSMTPPort(host: string, port: number): Promise<boolean> {
-  try {
-    // In serverless environment, we'll use a different approach
-    // Try to resolve the MX host first to ensure it's reachable
-    const hostResponse = await fetch(`https://dns.google/resolve?name=${host}&type=A`);
+    // For serverless environment, we'll use a simplified approach
+    // Check if the MX host resolves to an IP address
+    const hostResponse = await fetch(`https://dns.google/resolve?name=${mxHost}&type=A`);
     if (!hostResponse.ok) return false;
     
     const hostData = await hostResponse.json();
     if (!hostData.Answer || hostData.Answer.length === 0) return false;
     
-    // Check if it's a known email provider with good reputation
-    const knownProviders = [
-      'gmail.com', 'outlook.com', 'yahoo.com', 'hotmail.com',
-      'icloud.com', 'protonmail.com', 'zoho.com', 'fastmail.com',
-      'unimedsc.com.br', 'empresarial.com', 'corporate.com'
-    ];
-    
-    const isKnownProvider = knownProviders.some(provider => 
-      host.toLowerCase().includes(provider)
-    );
-    
-    if (isKnownProvider) {
-      return true; // Assume known providers have working SMTP
-    }
-    
-    // For other providers, we'll do a basic connectivity check
-    // This is a simplified approach for serverless
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
-    
-    try {
-      // Try to ping the host (simplified)
-      const response = await fetch(`https://httpbin.org/status/200`, {
-        signal: controller.signal,
-        headers: {
-          'User-Agent': 'EmailValidator/1.0'
-        }
-      });
-      
-      clearTimeout(timeoutId);
-      
-      // If we can reach the internet, assume SMTP might work
-      // This is a compromise for serverless limitations
-      return response.ok;
-    } catch (e) {
-      clearTimeout(timeoutId);
-      return false;
-    }
+    // If MX host resolves to IP, assume SMTP is working
+    // This is a compromise for serverless limitations
+    return true;
   } catch (error) {
     return false;
   }
