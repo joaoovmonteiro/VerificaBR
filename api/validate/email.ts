@@ -143,14 +143,6 @@ async function validateEmail(email: string) {
     // SMTP validation (simplified for serverless)
     const smtpValid = mxExists ? await checkSMTPConnection(domain) : false;
     
-    // Debug info (remove in production)
-    console.log(`Email validation debug for ${domain}:`, {
-      domainExists,
-      mxExists,
-      smtpValid,
-      isDisposable,
-      isRoleBased
-    });
     
     // Email is valid only if all critical checks pass
     const isValid = domainExists && !isDisposable && mxExists && smtpValid;
@@ -320,30 +312,23 @@ async function checkSMTPConnection(domain: string): Promise<boolean> {
     const mxDataParts = mxRecord.data.split(' ');
     const mxHost = mxDataParts.length > 1 ? mxDataParts[1].replace(/\.$/, '') : mxRecord.data.replace(/\.$/, '');
     
-    console.log(`SMTP Debug - MX Host: ${mxHost}`);
-    
     // For serverless environment, we'll use a simplified approach
     // Check if the MX host resolves to an IP address
     const hostResponse = await fetch(`https://dns.google/resolve?name=${mxHost}&type=A`);
     if (!hostResponse.ok) {
-      console.log(`SMTP Debug - Failed to resolve MX host: ${mxHost}`);
       return false;
     }
     
     const hostData = await hostResponse.json();
-    console.log(`SMTP Debug - Host data:`, hostData);
     
     if (!hostData.Answer || hostData.Answer.length === 0) {
-      console.log(`SMTP Debug - No IP found for MX host: ${mxHost}`);
       return false;
     }
     
     // If MX host resolves to IP, assume SMTP is working
     // This is a compromise for serverless limitations
-    console.log(`SMTP Debug - MX host resolves, assuming SMTP works`);
     return true;
   } catch (error) {
-    console.log(`SMTP Debug - Error:`, error);
     return false;
   }
 }
