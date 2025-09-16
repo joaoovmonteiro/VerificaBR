@@ -1,14 +1,9 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -20,7 +15,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { document } = req.body;
+    const { document } = req.body || {};
     
     if (!document) {
       return res.status(400).json({
@@ -36,13 +31,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const result = validateCpfCnpj(document);
     res.json(result);
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       success: false,
       valid: false,
-      document: req.body?.document || '',
-      formattedDocument: req.body?.document || '',
+      document: '',
+      formattedDocument: '',
       type: "CPF",
-      message: "Dados de entrada inválidos"
+      message: "Erro interno do servidor"
     });
   }
 }
