@@ -136,21 +136,25 @@ async function validateEmail(email: string) {
 
     // Basic domain validation (simplified for Vercel)
     const domainExists = await checkDomainExists(domain);
+    
+    // For Vercel, we'll do basic validation only
+    // MX and SMTP checks are disabled due to serverless limitations
+    const isValid = domainExists && !isDisposable;
 
     return {
       success: true,
-      valid: domainExists && !isDisposable,
+      valid: isValid,
       email,
-      result: domainExists && !isDisposable ? 'valid' : 'invalid',
-      reason: domainExists && !isDisposable ? 'domain_exists' : isDisposable ? 'disposable_email' : 'invalid_domain',
-      message: domainExists && !isDisposable ? 'Email válido' : isDisposable ? 'Email descartável detectado' : 'Domínio não encontrado',
+      result: isValid ? 'valid' : 'invalid',
+      reason: isValid ? 'domain_exists' : isDisposable ? 'disposable_email' : 'invalid_domain',
+      message: isValid ? 'Email válido (verificação básica)' : isDisposable ? 'Email descartável detectado' : 'Domínio não encontrado',
       checks: {
         syntax: true,
         domain: domainExists,
-        mx: false, // Simplified for Vercel
-        smtp: false, // Simplified for Vercel
-        disposable: isDisposable,
-        roleBase: isRoleBased,
+        mx: false, // Disabled for Vercel serverless
+        smtp: false, // Disabled for Vercel serverless
+        disposable: !isDisposable, // Inverted logic for display
+        roleBase: !isRoleBased, // Inverted logic for display
         catchAll: false,
       }
     };
@@ -218,14 +222,33 @@ function calculateSimilarity(str1: string, str2: string): number {
 
 async function checkDomainExists(domain: string): Promise<boolean> {
   try {
-    // Simple DNS check using fetch to a well-known endpoint
-    const response = await fetch(`https://dns.google/resolve?name=${domain}&type=A`, {
-      headers: {
-        'Accept': 'application/json'
+    // Try multiple DNS providers for better reliability
+    const providers = [
+      `https://dns.google/resolve?name=${domain}&type=A`,
+      `https://cloudflare-dns.com/dns-query?name=${domain}&type=A`,
+    ];
+    
+    for (const url of providers) {
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.Answer && data.Answer.length > 0) {
+            return true;
+          }
+        }
+      } catch (e) {
+        // Continue to next provider
+        continue;
       }
-    });
-    const data = await response.json();
-    return data.Answer && data.Answer.length > 0;
+    }
+    
+    return false;
   } catch (error) {
     return false;
   }
