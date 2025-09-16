@@ -315,7 +315,10 @@ async function checkSMTPConnection(domain: string): Promise<boolean> {
     const mxRecord = mxData.Answer.find((record: any) => record.type === 15);
     if (!mxRecord) return false;
     
-    const mxHost = mxRecord.data.replace(/\.$/, ''); // Remove trailing dot
+    // MX record format: "priority hostname"
+    // Extract just the hostname part
+    const mxDataParts = mxRecord.data.split(' ');
+    const mxHost = mxDataParts.length > 1 ? mxDataParts[1].replace(/\.$/, '') : mxRecord.data.replace(/\.$/, '');
     
     console.log(`SMTP Debug - MX Host: ${mxHost}`);
     
