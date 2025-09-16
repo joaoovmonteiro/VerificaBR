@@ -317,18 +317,30 @@ async function checkSMTPConnection(domain: string): Promise<boolean> {
     
     const mxHost = mxRecord.data.replace(/\.$/, ''); // Remove trailing dot
     
+    console.log(`SMTP Debug - MX Host: ${mxHost}`);
+    
     // For serverless environment, we'll use a simplified approach
     // Check if the MX host resolves to an IP address
     const hostResponse = await fetch(`https://dns.google/resolve?name=${mxHost}&type=A`);
-    if (!hostResponse.ok) return false;
+    if (!hostResponse.ok) {
+      console.log(`SMTP Debug - Failed to resolve MX host: ${mxHost}`);
+      return false;
+    }
     
     const hostData = await hostResponse.json();
-    if (!hostData.Answer || hostData.Answer.length === 0) return false;
+    console.log(`SMTP Debug - Host data:`, hostData);
+    
+    if (!hostData.Answer || hostData.Answer.length === 0) {
+      console.log(`SMTP Debug - No IP found for MX host: ${mxHost}`);
+      return false;
+    }
     
     // If MX host resolves to IP, assume SMTP is working
     // This is a compromise for serverless limitations
+    console.log(`SMTP Debug - MX host resolves, assuming SMTP works`);
     return true;
   } catch (error) {
+    console.log(`SMTP Debug - Error:`, error);
     return false;
   }
 }
