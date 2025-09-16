@@ -167,8 +167,8 @@ async function validateEmail(email: string) {
         domain: domainExists,
         mx: mxExists,
         smtp: smtpValid,
-        disposable: !isDisposable, // Inverted logic for display
-        roleBase: !isRoleBased, // Inverted logic for display
+        disposable: isDisposable ? false : true, // false = disposable (bad), true = not disposable (good)
+        roleBase: isRoleBased ? false : true, // false = role-based (bad), true = not role-based (good)
         catchAll: false,
       }
     };
