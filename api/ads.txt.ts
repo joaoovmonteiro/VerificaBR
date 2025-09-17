@@ -8,7 +8,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const adsTxtPath = path.resolve(process.cwd(), 'client', 'ads.txt');
+    const adsTxtPath = path.resolve(process.cwd(), 'ads.txt');
     
     if (fs.existsSync(adsTxtPath)) {
       res.setHeader('Content-Type', 'text/plain');
